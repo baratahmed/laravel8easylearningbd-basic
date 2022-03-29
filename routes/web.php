@@ -22,7 +22,17 @@ Route::get('/home', function () {
 });
 
 Route::get('/about', function () {
-    return 'About Page';
+    return view('about');
 })->middleware('checkage');
 
-Route::get('/contact',[ContactController::class,'index']);
+Route::get('/contact',[ContactController::class,'index'])->name('contact');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified'
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
