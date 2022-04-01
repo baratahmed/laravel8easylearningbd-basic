@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\CategoryController;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
 
@@ -29,6 +30,10 @@ Route::get('/about', function () {
 })->middleware('checkage');
 
 Route::get('/contact',[ContactController::class,'index'])->name('contact');
+
+
+//Category
+Route::get('/all/categories',[CategoryController::class,'index'])->name('all.cateories');
 
 Route::middleware(['auth:sanctum',config('jetstream.auth_session'),'verified'])->group(function () {
 
